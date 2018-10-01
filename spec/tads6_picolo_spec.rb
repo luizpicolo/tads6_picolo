@@ -5,6 +5,6 @@ RSpec.describe Tads6Picolo do
 
   it "Deveria mostrar as palavras Hello World" do
     x = Tads6Picolo::HelloWorld.new
-    expect(x.say).to eq("Hello World")
+    expect(x.say("Hello World")).to eq("Hello World")
   end
 end
