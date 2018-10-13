@@ -12,3 +12,4 @@
 
 *.gem
 /spec/support/tmp/db/livros/*.yml
+/example/db/carros/*.yml
