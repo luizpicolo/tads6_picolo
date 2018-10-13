@@ -22,24 +22,63 @@ Ou, instale diretamente executando o código abaixo em seu terminal:
 
 ## Como utilizar
 
-Para utilizar a gem deve-se realizar os seguintes passos:
+Para utilizar a `gem` deve-se realizar os seguintes passos:
 
-Primeiro crie um classe a qual você deseja persistir:
+Primeiro crie um novo arquivo e adicione uma classe a qual você deseja persistir seguindo as especificações abaixo:
 
 ```ruby
+# Require necessário
 require 'tads6_picolo'
 
+# Sua classe deve herdar a classe Tads6Picolo::ORM
 class Livro < Tads6Picolo::ORM
-  attr_accessor :id, :titulo
+  # Toda classe deve conter um :ID obrigatoriamente
+  attr_accessor :id, :modelo
 
+  # O construtor deve seguir o exemplo abaixo
   def initialize(hash)
-    @titulo = hash.first[:titulo]
+    @titulo = hash.first[:modelo]
   end
 
+  # Este método deve ser reescrito obrigatoriamente com o
+  # caminho para seu banco de dados 'db/carros'
   def self.path
     'local/onde/deseja/salvar/os/dados'
   end
 end
+```
+
+## Passo a Passo
+
+Crie o diretório com o caminho especificado no método `self.path`
+
+### Criar um novo registro:
+```ruby
+Carro.criar(
+  modelo: 'Fusca 5000'
+)
+```
+
+### Listar todos os registros:
+```ruby
+puts Carro.listar
+```
+
+### Selecionar um registro específico
+```ruby
+puts Carro.selecionar(1)
+```
+
+### Atualizar um registro específico
+```ruby
+carro = Carro.selecionar(1)
+carro.modelo = "novo modelo"
+Carro.atualizar(carro)
+```
+
+### Remover um registro específico
+```ruby
+Carro.remove(1)
 ```
 
 ## Importante
